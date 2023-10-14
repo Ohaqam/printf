@@ -3,48 +3,47 @@
  * _printf - function that print output
  * @format:type of inputs
  *
- * Return: 0
- **/
+ * Return: 0.
+ */
 
 int _printf(const char *format, ...)
 {
 	va_list args;
-	char buffer[1024];
 	int i = 0, j = 0;
-	int buffer_index = 0;
 
 	va_start(args, format);
-
-	while (format != NULL && format[i] != '\0')
+	for (i; format[i] != '\0'; i++)
 	{
-		switch (format[i])
+		if (format[i] != '%')
 		{
-			case 'c':
-				buffer[buffer_index++] = (char)va_arg(args, int);
-				break;
-			case 's':
-				{
-					char *str = va_arg(args, char *);
+			_putchar(format[i]);
+			j++;
+		}
+		else if (format[i] == '%')
+		{
+			if (format[i + 1] == 'c')
+			{
+				char c = (char)va_arg(args, int);
 
-					if (str == NULL)
-						str = "(nil)";
-					while (*str)
-						buffer[buffer_index++] = *str++;
+				_putchar(c);
+				j++;
+			}
+			if (format[i + 1] == 's')
+			{
+				char *str = va_arg(args, char *);
+
+				if (str == NULL)
+					str = "(nil)";
+				while (*str)
+				{
+					_putchar(*str);
+					j++;
+					str++;
 				}
-				break;
+			}
 		}
-		if ((format[i] == 'c' || format[i] == 's') && format[i + 1] != '\0')
-		{
-			buffer[buffer_index++] = ',';
-			buffer[buffer_index++] = ' ';
-		}
-		i++;
 	}
 
-	buffer[buffer_index] = '\0';
-
-	for (j; buffer[j] != '\0'; j++)
-		putchar(buffer[j]);
 	va_end(args);
 	return (j);
 }
