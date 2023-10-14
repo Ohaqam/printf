@@ -45,7 +45,6 @@ int _printf(const char *format, ...)
 
 	for (int j = 0; buffer[j] != '\0'; j++)
 		putchar(buffer[j]);
-	putchar('\n');
 	va_end(args);
 	return (0);
 }
