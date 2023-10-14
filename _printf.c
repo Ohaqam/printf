@@ -10,7 +10,7 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	char buffer[1024];
-	int i = 0;
+	int i = 0, j = 0;
 	int buffer_index = 0;
 
 	va_start(args, format);
@@ -43,9 +43,9 @@ int _printf(const char *format, ...)
 
 	buffer[buffer_index] = '\0';
 
-	for (int j = 0; buffer[j] != '\0'; j++)
+	for (j; buffer[j] != '\0'; j++)
 		putchar(buffer[j]);
 	va_end(args);
-	return (0);
+	return (j);
 }
 
