@@ -1,12 +1,44 @@
 #include "main.h"
 
 /**
+ * _printfcharc - function that print output
+ * @c:type of inputs
+ * @j:type of inputs
+ *
+ * Return: j.
+ **/
+int _printfcharc(char c, int j)
+{
+	_putchar(c);
+	j++;
+	return (j);
+}
+/**
+ * _printfstr - function that print output
+ * @str:type of inputs
+ * @j:type of inputs
+ *
+ * Return: j.
+ **/
+int _printfstr(char *str, int j)
+{
+	if (str == NULL)
+		str = "(nil)";
+	while (*str)
+	{
+		_putchar(*str);
+		j++;
+		str++;
+	}
+	return (j);
+}
+
+/**
  * _printf - function that print output
  * @format:type of inputs
  *
  * Return: 0.
  */
-
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -16,45 +48,27 @@ int _printf(const char *format, ...)
 	while (format[i] != '\0')
 	{
 		if (format[i] != '%')
-		{
-			_putchar(format[i]);
-			j++;
-			i++;
-		}
+			j = _printfcharc(format[i], j);
 		else if (format[i] == '%')
 		{
 			if (format[i + 1] == '%')
 			{
-				putchar('%');
-				j++;
+				j = _printfcharc(format[i], j);
 				i++;
 			}
 			else if (format[i + 1] == 'c')
 			{
-				char c = (char)va_arg(args, int);
-
-				_putchar(c);
-				j++;
+				j = _printfcharc((char)va_arg(args, int), j);
 				i++;
 			}
 			else if (format[i + 1] == 's')
 			{
-				char *str = va_arg(args, char *);
-
-				if (str == NULL)
-					str = "(nil)";
-				while (*str)
-				{
-					_putchar(*str);
-					j++;
-					str++;
-				}
+				j = _printfstr(va_arg(args, char *), j);
 				i++;
 			}
 		}
 		i++;
 	}
-
 	va_end(args);
 	return (j);
 }
