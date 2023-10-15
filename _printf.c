@@ -4,49 +4,58 @@
  * _printf - function that print output
  * @format:type of inputs
  *
- * Return: 0
- **/
+ * Return: 0.
+ */
 
 int _printf(const char *format, ...)
 {
 	va_list args;
-	char buffer[1024];
-	int i = 0;
-	int buffer_index = 0;
+	int i = 0, j = 0;
 
 	va_start(args, format);
-
-	while (format != NULL && format[i] != '\0')
+	while (format[i] != '\0')
 	{
-		switch (format[i])
+		if (format[i] != '%')
 		{
-			case 'c':
-				buffer[buffer_index++] = (char)va_arg(args, int);
-				break;
-			case 's':
-				{
-					char *str = va_arg(args, char *);
-
-					if (str == NULL)
-						str = "(nil)";
-					while (*str)
-						buffer[buffer_index++] = *str++;
-				}
-				break;
+			_putchar(format[i]);
+			j++;
+			i++;
 		}
-		if ((format[i] == 'c' || format[i] == 's') && format[i + 1] != '\0')
+		else if (format[i] == '%')
 		{
-			buffer[buffer_index++] = ',';
-			buffer[buffer_index++] = ' ';
+			if (format[i + 1] == '%')
+			{
+				putchar('%');
+				j++;
+				i++;
+			}
+			else if (format[i + 1] == 'c')
+			{
+				char c = (char)va_arg(args, int);
+
+				_putchar(c);
+				j++;
+				i++;
+			}
+			else if (format[i + 1] == 's')
+			{
+				char *str = va_arg(args, char *);
+
+				if (str == NULL)
+					str = "(nil)";
+				while (*str)
+				{
+					_putchar(*str);
+					j++;
+					str++;
+				}
+				i++;
+			}
 		}
 		i++;
 	}
 
-	buffer[buffer_index] = '\0';
-
-	for (int j = 0; buffer[j] != '\0'; j++)
-		putchar(buffer[j]);
 	va_end(args);
-	return (0);
+	return (j);
 }
 
