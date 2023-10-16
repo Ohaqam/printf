@@ -1,18 +1,34 @@
 #include "main.h"
 
 /**
+ * _printfchar - function that print output
+ * @c:type of inputs
+ * @j:type of inputs
+ *
+ * Return: j.
+ **/
+
+int _printfchar(char c, int j)
+{
+	_putchar(c);
+	return (j++);
+}
+
+/**
  * _printfcharc - function that print output
  * @c:type of inputs
  * @j:type of inputs
  *
  * Return: j.
  **/
+
 int _printfcharc(char c, int j)
 {
 	_putchar(c);
 	j++;
 	return (j);
 }
+
 /**
  * _printfstr - function that print output
  * @str:type of inputs
@@ -20,6 +36,7 @@ int _printfcharc(char c, int j)
  *
  * Return: j.
  **/
+
 int _printfstr(char *str, int j)
 {
 	if (str == NULL)
@@ -64,6 +81,11 @@ int _printf(const char *format, ...)
 			else if (format[i + 1] == 's')
 			{
 				j = _printfstr(va_arg(args, char *), j);
+				i++;
+			}
+			else
+			{
+				j = _printfint_double(format[i + 1], va_arg(args, int), j);
 				i++;
 			}
 		}
