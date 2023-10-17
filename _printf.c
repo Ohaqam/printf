@@ -79,7 +79,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				j = _printfint_double(format[i + 1], va_arg(args, int), j);
+				j = _printfint_double(format[i + 1], va_arg(args, long int), j);
 				i++;
 			}
 		}

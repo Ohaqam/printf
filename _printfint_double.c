@@ -7,7 +7,7 @@
  * Return: j
  **/
 
-int _printfint(int i, int j)
+int _printfint(long int i, int j)
 {
 	if (i < 0)
 	{
@@ -34,7 +34,7 @@ int _printfint(int i, int j)
  * Return: j
  **/
 
-int _printfint_double(char c, int i, int j)
+int _printfint_double(char c, long int i, int j)
 {
 	if (i == 0)
 	{
