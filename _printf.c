@@ -1,20 +1,6 @@
 #include "main.h"
 
 /**
- * _printfchar - function that print output
- * @c:type of inputs
- * @j:type of inputs
- *
- * Return: j.
- **/
-
-int _printfchar(char c, int j)
-{
-	_putchar(c);
-	return (j++);
-}
-
-/**
  * _printfcharc - function that print output
  * @c:type of inputs
  * @j:type of inputs
@@ -24,9 +10,14 @@ int _printfchar(char c, int j)
 
 int _printfcharc(char c, int j)
 {
-	_putchar(c);
-	j++;
-	return (j);
+	if (c == '\0')
+		return (-1);
+	else
+	{
+		_putchar(c);
+		j = j + 1;
+		return (j);
+	}
 }
 
 /**
@@ -40,7 +31,7 @@ int _printfcharc(char c, int j)
 int _printfstr(char *str, int j)
 {
 	if (str == NULL)
-		str = "(nil)";
+		str = "(null)";
 	while (*str)
 	{
 		_putchar(*str);
@@ -56,6 +47,7 @@ int _printfstr(char *str, int j)
  *
  * Return: 0.
  */
+
 int _printf(const char *format, ...)
 {
 	va_list args;

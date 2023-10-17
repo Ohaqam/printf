@@ -12,15 +12,17 @@ int _printfint(int i, int j)
 	if (i < 0)
 	{
 		_putchar('-');
-		_putchar('0' + i);
+		j = j + 1;
+		j = _printfint(-(i), j);
+		return (j);
 	}
 	else if (i != 0)
 	{
-		_printfint(i / 10, j);
+		j = _printfint(i / 10, j);
 		_putchar('0' + i % 10);
+		j = j + 1;
+		return (j);
 	}
-
-	j = j + 1;
 	return (j);
 }
 
@@ -34,14 +36,15 @@ int _printfint(int i, int j)
 
 int _printfint_double(char c, int i, int j)
 {
-	if (c == 'i' || c == 'd')
+	if (i == 0)
 	{
-		if (i == 0)
-		{
-			_putchar('0');
-		}
-		else
-			_printfint(i, j);
+		_putchar('0');
+		j = j + 1;
+		return (j);
+	}
+	else if (c == 'i' || c == 'd')
+	{
+		j = _printfint(i, j);
 		return (j);
 	}
 	else
