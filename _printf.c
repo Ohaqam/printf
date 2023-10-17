@@ -11,7 +11,9 @@
 int _printfcharc(char c, int j)
 {
 	if (c == '\0')
+	{
 		return (-1);
+	}
 	else
 	{
 		_putchar(c);
