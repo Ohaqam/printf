@@ -7,13 +7,16 @@
  * Return: j
  **/
 
-int _printfint(long int i, int j)
+int _printfint(int i, int j)
 {
+	unsigned int x;
+
 	if (i < 0)
 	{
 		_putchar('-');
 		j = j + 1;
-		j = _printfint(-(i), j);
+		x = -1 * i;
+		j = _printfint(x, j);
 		return (j);
 	}
 	else if (i != 0)
@@ -34,7 +37,7 @@ int _printfint(long int i, int j)
  * Return: j
  **/
 
-int _printfint_double(char c, long int i, int j)
+int _printfint_double(char c, int i, int j)
 {
 	if (i == 0)
 	{

@@ -12,7 +12,7 @@ int _printfcharc(char c, int j)
 {
 	if (c == '\0')
 	{
-		return (-1);
+		return (0);
 	}
 	else
 	{
@@ -79,7 +79,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				j = _printfint_double(format[i + 1], va_arg(args, long int), j);
+				j = _printfint_double(format[i + 1], va_arg(args, int), j);
 				i++;
 			}
 		}
@@ -88,4 +88,3 @@ int _printf(const char *format, ...)
 	va_end(args);
 	return (j);
 }
-
