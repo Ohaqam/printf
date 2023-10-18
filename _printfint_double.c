@@ -49,8 +49,7 @@ int _printfint_double(char c, int i, int j)
 	{
 		j = _printfint(i, j);
 		return (j);
-	}
-	else
+	}	else
 		return (-1);
 	return (j);
 }
