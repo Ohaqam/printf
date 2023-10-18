@@ -36,17 +36,14 @@ int _printfint(long int i, int j)
 
 int _printfint_double(char c, int i, int j)
 {
-	if (i == 0)
-	{
-		_putchar('0');
-		j = j + 1;
-		return (j);
-	}
-	else if (c == 'i' || c == 'd')
+	if (c == 'i' || c == 'd')
 	{
 		j = _printfint(i, j);
 		return (j);
-	}	else
-		return (-1);
-	return (j);
+	}
+	else
+	{
+		j = -1;
+		return (j);
+	}
 }
