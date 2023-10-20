@@ -56,34 +56,41 @@ int _printf(const char *format, ...)
 	int i = 0, j = 0;
 
 	va_start(args, format);
-	while (format[i] != '\0')
+	if (format == NULL)
 	{
-		if (format[i] != '%')
-			j = _printfcharc(format[i], j);
-		else if (format[i] == '%')
+		return (0);
+	}
+	else
+	{
+		while (format[i] != '\0')
 		{
-			if (format[i + 1] == '%')
-			{
+			if (format[i] != '%')
 				j = _printfcharc(format[i], j);
-				i++;
-			}
-			else if (format[i + 1] == 'c')
+			else if (format[i] == '%')
 			{
-				j = _printfcharc((char)va_arg(args, int), j);
-				i++;
+				if (format[i + 1] == '%')
+				{
+					j = _printfcharc(format[i], j);
+					i++;
+				}
+				else if (format[i + 1] == 'c')
+				{
+					j = _printfcharc((char)va_arg(args, int), j);
+					i++;
+				}
+				else if (format[i + 1] == 's')
+				{
+					j = _printfstr(va_arg(args, char *), j);
+					i++;
+				}
+				else
+				{
+					j = _printfint_double(format[i + 1], va_arg(args, int), j);
+					i++;
+				}
 			}
-			else if (format[i + 1] == 's')
-			{
-				j = _printfstr(va_arg(args, char *), j);
-				i++;
-			}
-			else
-			{
-				j = _printfint_double(format[i + 1], va_arg(args, int), j);
-				i++;
-			}
+			i++;
 		}
-		i++;
 	}
 	va_end(args);
 	return (j);
